@@ -1,3 +1,4 @@
+# Artigo escrito por [Rodolfo Fadino Jr](https://rodolfofadino.com.br/@RodolfoFadino) disponivel no link https://rodolfofadino.com.br/criando-um-certificado-ssl-para-testes-com-powershell-bb6aa56b5cff
 Recentemente estava trabalhando com alguns desenvolvimentos e testes que necessitavam de um certificado SSL em meu ambiente de desenvolvimento. Neste post vou mostrar como emitir um certificado com PowerShell, e adicionar ele como confiável em nosso computador.
 
 Cenário
@@ -104,4 +105,13 @@ Em resumo, estes são os comandos para criar e exportar o certificado, lembrando
 
 ![Alegre](https://miro.medium.com/max/19/0*xLHJuWtjlKg4sUvW.png)
 
-New-SelfSignedCertificate -certstorelocation Cert:\CurrentUser\My -dnsname [www.dominioteste.com.br](http://www.dominioteste.com.br/)##96F42D55959FD4EE82EEFF66B758CBAD1FF2AC37$pwd = ConvertTo-SecureString -String "minhasenha" -Force -AsPlainTextExport-PfxCertificate -cert Cert:\CurrentUser\My\96F42D55959FD4EE82EEFF66B758CBAD1FF2AC37 -FilePath c:\temp\www.dominioteste.com.br.pfx -Password $pwdEspero que este post seja útil, estou a disposição para dúvidas, criticas ou sugestões.absRodolfo
+```
+New-SelfSignedCertificate -certstorelocation Cert:\CurrentUser\My -dnsname www.dominioteste.com.br
+
+##96F42D55959FD4EE82EEFF66B758CBAD1FF2AC37
+
+$pwd = ConvertTo-SecureString -String "minhasenha" -Force -AsPlainText
+
+Export-PfxCertificate -cert Cert:\CurrentUser\My\96F42D55959FD4EE82EEFF66B758CBAD1FF2AC37 -FilePath c:\temp\www.dominioteste.com.br.pfx -Password $pwd
+
+```
